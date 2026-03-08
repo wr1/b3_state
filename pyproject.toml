@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "b3_state"
+version = "0.1.3"
+description = "Library for managing file-based states in computational workflows"
+authors = [{ name = "wr1", email = "8971152+wr1@users.noreply.github.com" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+  "pydantic>=2.0",
+  "pyyaml>=6.0",
+  "ruamel.yaml>=0.17",
+  "rich>=13.0",
+  "treeparse",
+  "pytest-cov"
+]
+
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "ruff>=0.1"]
+
+[project.scripts]
+b3_state = "b3_state.cli.main:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/b3_state"]
+
+[tool.ruff]
+line-length = 88
