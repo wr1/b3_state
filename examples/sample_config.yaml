@@ -1,0 +1,67 @@
+general:
+  workdir: temp_blade
+
+geometry:
+  planform:
+    npchord: 200
+    npspan: 100
+    pre_rotation: -90
+    # offset in prebend direction, negative is upwind
+    dx: [[0.0, 0.0], [0.2, 0.0], [0.4, 0.0], [1.0, -5.0]]
+    # offset in chord direction
+    dy: [[0.0, 0.0], [0.01, 0], [0.3, -0.586], [0.43, -0.529],
+      [0.56, -0.498], [0.69, -0.4355],
+      [0.82, -0.329], [0.95, -0.33]]
+    z: [[0, -3], [1, -126]]
+    chord: [[0.0, 5], [0.03, 5.06], [0.2, 6.5], [0.4, 4.4], [0.6, 2.8], [0.75, 2.0], [
+        0.94, 1.4], [0.985, 0.8], [1, 0.1]]
+    thickness: [[0.0, 1.0], [0.05, 0.97], [0.2, 0.53], [0.31, 0.39], [1.0, 0.17]]
+    twist: [[0.0, 10], [0.2, 2], [0.4, 1], [0.6, 0], [0.8, -0.5], [0.9, -1], [1.0, 0]]
+
+  webs:
+    - name: web0
+      type: plane
+      origin: [0, 0, 0]
+      orientation: [0.02, 1, 0]
+      z_range: [-100, -10]
+      element_size: 0.11
+      # z_start: -100
+      # z_end: -10
+    - name: web1
+      type: plane
+      origin: [0, 0.5, 0]
+      orientation: [0.02, 1, 0]
+      z_range: [-110, -30]
+      element_size: 0.11
+      # z_start: -110
+      # z_end: -30
+
+airfoils: 
+  - path: airfoils/DU93-W-210_smoothed_dero_0.210.dat
+    name: DU93-W-210
+    thickness: 0.21
+  - path: airfoils/du_91_w2_250_smoothed_dero_0.250.dat
+    name: DU91-W-250
+    thickness: 0.25
+  - path: airfoils/circ_m32.dat
+    name: Circ M32
+    thickness: 1.0
+  - path: airfoils/naca633418_te.dat
+    name: NACA 633418 TE
+    thickness: 0.179928
+  - path: airfoils/naca0017.dat
+    name: NACA 0017
+    thickness: 0.17
+
+mesh:
+  spanwise:
+    
+  chordwise:
+    default:
+      n_elem: 50  # number of elements per panel where panel between 2 hard points, hard points being the start or end of the airfoil line, or a web intersection
+      element_size: 0.11
+    panels:
+      - id: 0
+        element_size: 0.04
+      - id: 1
+        element_size: 0.11
